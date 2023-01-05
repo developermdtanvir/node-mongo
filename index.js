@@ -2,41 +2,27 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
-const bodyparser = require('body-parser');
-app.use(cors({
-    origin: "*"
-}))
-app.use(bodyparser.json());
 
-const port = 3001;
-const friends = [
-    { name: 'Tanvir', roll: 30, section: 'B' },
-    { name: 'Tamim', roll: 30, section: 'B' },
-    { name: 'Rony', roll: 30, section: 'B' },
-    { name: 'Tareq', roll: 30, section: 'B' },
-    { name: 'Shazzed', roll: 30, section: 'B' },
-    { name: 'Rymon', roll: 30, section: 'B' }
+app.use(cors(
+    { origin: 'http://127.0.0.1:5500' }
+));
+
+
+const port = 3000;
+const users = [{ name: 'Tanvir', Roll: 20 },
+{ name: 'Shamim', Roll: 3 },
+{ name: 'Shakib', Roll: 20 },
+{ name: 'Rimon', Roll: 21 },
+{ name: 'Rony', Roll: 22 }
 ]
-const names = ['Tanvir', 'Shakil', 'Tamim', 'Sabbir']
-
-app.get('/', (req, res) => {
-    res.send("Yay i am running for node fermwork")
-})
-
-// another get request 
-app.get('/name/:id', (req, res) => {
-    const id = req.params.id
-    const name = names[id]
-    res.send({ name, id });
-    console.log(req.query)
-})
-
-// post request send and save database and update data 
-app.post('/user', (req, res) => {
-    const user = req.body;
-    user.id = 30;
+app.get('/user/:id', (req, res) => {
+    const userId = req.params.id;
+    const user = users[userId]
     res.send(user);
 })
 
+app.get('/', (req, res) => {
+    res.send('My Express js Server is Ready')
+})
 
-app.listen(port, () => console.log(`lisiting port ${port}`))
+app.listen(port, () => console.log(`listining port ${port}`))
