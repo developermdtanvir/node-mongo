@@ -1,29 +1,23 @@
-const express = require('express')
+const express = require('express');
+const app = express();
 
-const app = express()
+const port = 3001;
+const friends = [
+    { name: 'Tanvir', roll: 30, section: 'B' },
+    { name: 'Tamim', roll: 30, section: 'B' },
+    { name: 'Rony', roll: 30, section: 'B' },
+    { name: 'Tareq', roll: 30, section: 'B' },
+    { name: 'Shazzed', roll: 30, section: 'B' },
+    { name: 'Rymon', roll: 30, section: 'B' }
+]
 
-const cors = require('cors')
-
-const bodypaser = require('body-parser')
-
-app.use(bodypaser.json());
-app.use(cors());
-const username = ['Tanvir', 'Rahim', 'Karim', 'Jamil', 'Mahmudul']
-
-app.get('/user/:id', (req, res) => {
-    const userId = req.params.id;
-
-    //it is old version website using sort 
-    // console.log(req.query.sort)
-
-
-    const name = username[userId];
-    res.send(name);
+app.get('/', (req, res) => {
+    res.send("Yay i am running for node fermwork")
 })
 
-app.post('/adduser', (req, res) => {
-    console.log(req.body)
+// another get request 
+app.get('/user', (req, res) => {
+    res.send(friends);
 })
 
-app.listen('3000', () => console.log('lintining Port 3000'))
-
+app.listen(port, () => console.log(`lisiting port ${port}`))
